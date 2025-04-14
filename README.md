@@ -50,7 +50,17 @@ create index t1_id on t1 using btree(id);
 ```
 ![План запроса](img/3task.png)
 
-### [4] ускорить запрос "semi-join", добиться времени выполнения < 10sec
-``` sql
-select day from t2 where t_id in ( select t1.id from t1 where t2.t_id = t1.id) and day > to_char(date_trunc('day',now()- '1 months'::interval),'yyyymmdd');
+### Задание 4 ускорить запрос "semi-join", добиться времени выполнения < 10sec
+Запрос:
+``` sql 
+select day from t2 where t_id in ( select t1.id from t1 where t2.t_id = t1.id) and day > to_char(date_trunc('day',now()- '1 months'::interval),'yyyymmdd');  
 ```
+Используемые индексы для запроса:
+```sql  
+create index t2_day on t2 using btree(day);  
+create index t1_id_hash on t1 using btree(id);  
+```
+План выполнения запроса:
+![План запроса](img/4task.png)
+
+### Задание 5 ускорить работу "savepoint + update", добиться постоянной во времени производительности (число транзакций в секунду)
