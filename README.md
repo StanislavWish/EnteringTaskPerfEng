@@ -81,3 +81,5 @@ create index t1_id_hash on t1 using btree(id);
 
 Я увеличил размер разделяемой памяти, выделенной для PostgreSQL (параметр shred buffers в файле postgresql.conf) с 128 мб до 1024 Мб. Так же изменил параметры
 А также, учитывая что в сценарии обновляется не индексируемый столбец, изменил fillfactor таблицы, чтобы задействовать HOT update-ы в свободное пространство страниц постгресса.
+
+![Dashboard activity](img/5task.png)
